@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mabuhay Airlines</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'CSS/FLIGHTFRONT.css' %}">
+</head>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div><img src="{% static 'Media/mabuhay_logo.png' %}" class="logo" ></div>
+        
+        <nav class="d-flex justify-content-center">
+            <button class="Hbtn" type="button" onclick="window.location.href='{% url 'front' %}'">Book</button>
+            <button class="Hbtn" type="button" onclick="window.location.href='{% url 'promos' %}'">Promos</button>
+        </nav>
+    
+        <div style="text-align: right; margin-top: 10px;">
+            <form action="{% url 'user_prof' %}" method="GET">
+                <input type="image" src="{{ profile_picture_url|default:'static/media/default_profile.png' }}" alt="Profile"  style='height:43px; border-radius:50px;'>
+                <br>
+                <a onclick="return confirmSignOut()" style="top:20%" href="{% url 'logout' %}" style=" color:#ffffff; margin-left: 255px; margin-right: 10px;">Sign out</a>
+            </form>
+        </div>
+    </header>
+
+    <!-- Main Content Section -->
+    <main class="container">
+        <br>
+        <h2 class="p">Discounted Flights</h2>
+        <br>
+        <div class="row">
+            {% for flight in discounted_flights %}
+            <div style="align-self: center;" class="">
+                <div class="card shadow-sm">
+                    <div class="card-header">
+                        <h5>Flight {{ flight.flight_number }}</h5>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Departure:</strong> {{ flight.departure|date:"F j, Y" }}</p>
+                        <p><strong>From:</strong> {{ flight.origin }}</p>
+                        <p><strong>Arrival:</strong> {{ flight.arrival|date:"F j, Y" }}</p>
+                        <p><strong>To:</strong> {{ flight.destination }}</p>
+                        <p><em>Discount:</em> {{ flight.discount }}%</p>
+                        <p><strong>Discounted Price:</strong> ₱{{ flight.discounted_price }}</p>
+                    </div>
+                    <div class="card-footer text-center">
+                        <button class="btn" onclick="window.location.href='{% url 'personalInfo' flight.id %}'">Book Now</button>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="alert alert-info text-center">
+                No discounted flights available at the moment.
+            </div>
+            {% endfor %}
+        </div>
+        <br>
+        <div >
+            <button style="align-self: center;" class="Hbtn btn-secondary" onclick="window.location.href='{% url 'front' %}'">Return to Booking</button>
+        </div>
+    </main>
+
+    <footer>
+        <table style="width: 100%; height: 80px; text-align: center; border-collapse: collapse; table-layout: fixed;" border="1">
+            <tr>
+                <td style="border: 1px solid black;">Contact us at</td>
+                <td style="border: 1px solid black;">Mabuhay@airlines.com</td>
+                <td style="border: 1px solid black;"></td>
+            </tr>
+            <tr>
+                <td style="border: 1px solid black;">Phone</td>
+                <td style="border: 1px solid black;">+63 95 4345 345</td>
+                <td style="border: 1px solid black;">&copy;2024 Airlines. All rights reserved.</td>
+            </tr>
+            <tr>
+                <td style="border: 1px solid black;">Address</td>
+                <td style="border: 1px solid black;">123 Airline Road, City, Country</td>
+                <td style="border: 1px solid black;"></td>
+            </tr>
+        </table>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function confirmSignOut() {
+            return confirm("Are you sure you want to sign out?");
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <title>Ticket Sales Report</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("{% static 'Media/mabuhay_logo.png' %}") no-repeat center center;
+            background-size: cover;
+            opacity: 0.1; /* Adjust transparency (0.1 = very transparent, 1 = opaque) */
+            z-index: -1;
+        }
+
+        .content {
+            position: relative;
+            z-index: 1; /* Ensure content is above the background */
+            padding: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: rgb(22, 18, 63); /* Background color for the table head */
+            color: rgb(253, 249, 249); /* Text color for the table head */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="background"></div>
+    <h1 style='color:rgb(22, 18, 63);'>Ticket Sales Report</h1>
+    <h2>For the Month of {{ month_name }}</h2> <!-- Display the month name -->
+
+    <table>
+        <thead>
+            <tr>
+                <th>User</th>
+                <th>Card Number</th>
+                <th>Flight Number</th>
+                <th>Payment Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for sale in sales %}
+            <tr>
+                <td>
+                    {% if sale.user %}
+                        {{ sale.user.username }}
+                    {% else %}
+                        Anonymous
+                    {% endif %}
+                </td>
+                <td>{{ sale.card_number }}</td>
+                <td>{{ sale.flight_num }}</td>
+                <td>{{ sale.payment_amount }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4">No sales data available.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <p class="total-income">Total Income: ₱{{ total_income }}</p> 
+</body>
+</html>

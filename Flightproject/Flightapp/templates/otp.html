@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTP Verification</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'CSS/OTP.css' %}">
+</head>
+<body>
+    <form class='form' action="{% url 'verify_otp' %}" method="POST">
+        <img src="{% static 'Media/mabuhay_logo.png' %}" class="logo">
+        {% csrf_token %}
+        <h1>Verify OTP</h1>
+        <p>Please enter the OTP sent to your email:</p>
+        <label>
+            <input 
+                type="text" 
+                id="otp" 
+                name="otp" 
+                class="input" 
+                required 
+                maxlength="40"
+                pattern="[A-Za-z/s]+" 
+                oninput="validateLetters(this)">
+            <span>Email:</span>
+        </label>
+        <button class='button'type="submit">Verify</button>
+    </form>
+</body>
+</html>

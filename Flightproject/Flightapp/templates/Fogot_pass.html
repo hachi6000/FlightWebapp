@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Recovery</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'CSS/Forgotpass.css' %}">
+</head>
+<body>
+    <form class='form' action="{% url 'forgot_password' %}" method="POST">
+        {% csrf_token %}
+            <img src="{% static 'Media/mabuhay_logo.png' %}" class="logo">
+            <h1>Change Your Password</h1>
+            <!-- Email Input Field -->
+            <label>
+                <input 
+                    type="email" 
+                    id="email" 
+                    name="email" 
+                    class="input" 
+                    required 
+                    maxlength="40"
+                    pattern="[A-Za-z/s]+" 
+                    oninput="validateLetters(this)">
+                <span>Email:</span>
+            </label>
+            <!-- Submit Button -->
+            <input type="submit" class='button' value="Submit">
+            <!-- Error Message (if any) -->
+            {% if error %}
+                <p style="color: red; font-size: 0.9rem; margin-top: 10px;">{{ error }}</p>
+            {% endif %}
+    </form>
+
+</body>
+</html>

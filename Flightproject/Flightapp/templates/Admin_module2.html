@@ -1,0 +1,118 @@
+{% extends "admin_header.html" %}
+
+{% block body %}
+
+{% load static %}
+
+<nav style="align-items: center; width:100%;" class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+        <a class="adminP navbar-brand" href="#">Admin Panel</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <button class="btn" type="button" onclick="window.location.href='{% url 'admin2' %}'" class="nav-link">Confirm Flights</button>
+                </li>
+                <li class="nav-item">
+                    <button class="btn" type="button" onclick="window.location.href='{% url 'admin1' %}'"  class="nav-link">Add Flights</button>
+                </li>
+                <li class="nav-item">
+                    <button class="btn" type="button" onclick="window.location.href='{% url 'adminpromos' %}'" class="nav-link">Promos</button>
+                </li>
+                <li class="nav-item">
+                    <button class="btn" type="button" onclick="window.location.href='{% url 'flighthistory' %}'" class="nav-link">History of Flights</button>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<h1 class="p2 text-center mb-4">Confirm Bookings</h1>
+
+<div class="booking-container">
+    <h3 class="p mb-4">Flight Ticket Sales</h3>
+    <fieldset style="width: 100%;">
+        <!-- Bootstrap Table -->
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover table-sm">
+                <thead class="table-light">
+                    <tr>
+                        <th class="text-center">Ticket No</th>
+                        <th class="text-center">Email</th>
+                        <th class="text-center">Departure Date</th>
+                        <th class="text-center">Arrival Date</th>
+                        <th class="text-center">Departure Time</th>
+                        <th class="text-center">Arrival Time</th>
+                        <th class="text-center">Return Date</th>
+                        <th class="text-center">Origin</th>
+                        <th class="text-center">Destination</th>
+                        <th class="text-center">Seat No</th>
+                        <th class="text-center">Seat Type</th>
+                        <th class="text-center">Flight No</th>
+                        <th class="text-center">Reference No</th>
+                        <th class="text-center">Amount</th>
+                        <th class="text-center">Payment Status</th>
+                        <th class="text-center">Payment Date</th>
+                        <th class="text-center">Flight Status</th>
+                        <th class="text-center">Confirm</th>
+                    </tr>
+                </thead>
+                <tbody id="flightTable">
+                    {% if flights %}
+                        {% for flight in flights %}
+                        <tr>
+                            <td class="text-center text-nowrap">{{ flight.ticket_no }}</td>
+                            <td class="text-center text-nowrap">{{ flight.user.email }}</td>
+                            <td class="text-center text-nowrap">{{ flight.departure }}</td>
+                            <td class="text-center text-nowrap">{{ flight.arrival }}</td>
+                            <td class="text-center text-nowrap">{{ flight.departure_time|time:"h:i A" }}</td>
+                            <td class="text-center text-nowrap">{{ flight.arrival_time|time:"h:i A" }}</td>
+                            <td class="text-center text-nowrap">{{ flight.return_date|default:"N/A" }}</td>
+                            <td class="text-center text-nowrap">{{ flight.origin }}</td>
+                            <td class="text-center text-nowrap">{{ flight.destination }}</td>
+                            <td class="text-center text-nowrap">{{ flight.seat_num }}</td>
+                            <td class="text-center text-nowrap">{{ flight.seat_type }}</td>
+                            <td class="text-center text-nowrap">{{ flight.flight_num }}</td>
+                            <td class="text-center text-nowrap">{{ flight.reference_num }}</td>
+                            <td class="text-center text-nowrap">₱ {{ flight.amount }}</td>
+                            <td class="text-center text-nowrap">{{ flight.payment_status }}</td>
+                            <td class="text-center text-nowrap">{{ flight.payment_date }}</td>
+                            <td class="text-center text-nowrap">{{ flight.flight_status }}</td>
+                            <td class="text-center text-nowrap">
+                                <form method="POST" class="d-inline">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="ticket_no" value="{{ flight.ticket_no }}">
+                                    <button 
+    onclick="return confirmFlight(this.form);" 
+    type="submit" 
+    class="btn btn-success btn-sm"
+    {% if flight.flight_status != 'Waiting' or flight.payment_status != 'Paid' %} disabled {% endif %}>
+    Confirm
+</button>
+
+                                </form>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    {% else %}
+                        <tr>
+                            <td colspan="17" class="text-center">No bookings available for confirmation.</td>
+                        </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>            
+    </fieldset>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    function confirmFlight(form) {
+        const confirmation = confirm("Are you sure you want to confirm this flight?");
+        return confirmation; // Return true to submit, false to cancel
+    }
+</script>
+
+{% endblock %}

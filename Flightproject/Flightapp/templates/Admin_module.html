@@ -1,0 +1,114 @@
+{% extends "admin_header.html" %}
+
+{% block body %}
+
+{% load static %}
+
+<nav style="align-items: center; width:100%;" class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+        <a class="adminP navbar-brand" href="#">Admin Panel</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <button class="btn" type="button" onclick="window.location.href='{% url 'admin2' %}'" class="nav-link">Confirm Flights</button>
+                </li>
+                <li class="nav-item">
+                    <button class="btn" type="button" onclick="window.location.href='{% url 'admin1' %}'"  class="nav-link">Add Flights</button>
+                </li>
+                <li class="nav-item">
+                    <button class="btn" type="button" onclick="window.location.href='{% url 'adminpromos' %}'" class="nav-link">Promos</button>
+                </li>
+                <li class="nav-item">
+                    <button class="btn" type="button" onclick="window.location.href='{% url 'flighthistory' %}'" class="nav-link">History of Flights</button>
+                </li>
+                <!-- New Payment Records Button -->
+
+            </ul>
+        </div>
+    </div>
+</nav>
+        <br>
+        <h1 class="p2 text-center mb-4">Mabuhay Airlines</h1>
+    <div class="container mt-4">
+    <main class="container my-5">
+                <h2 class="p mb-4">View Flight Details</h2>
+            <fieldset>
+            <article>
+                <form action="admin1" method="POST" class="needs-validation" novalidate>
+                    {% csrf_token %}
+                    <fieldset class="mb-3">
+                        <legend>Flight Type</legend>
+                        <div class="">
+                            <input type="radio" id="one-way" name="flight-type" value="one-way" class="form-check-input" checked>
+                            <label for="one-way" class="form-check-label">One Way</label>
+                        </div>
+                        <div class="">
+                            <input type="radio" id="return" name="flight-type" value="return" class="form-check-input">
+                            <label for="return" class="form-check-label">Return</label>
+                        </div>
+                    </fieldset>
+
+                    <div class="mb-3">
+                        <label for="from" class="form-label">From:</label>
+                        <select id="from" name="from" class="form-select" required>
+                            <option value="" disabled selected>Select Departure City</option>
+                            <option value="Manila">Manila</option>
+                            <option value="Cebu">Cebu</option>
+                            <option value="Davao">Davao</option>
+                            <option value="Clark">Clark</option>
+                            <option value="Iloilo">Iloilo</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="to" class="form-label">To:</label>
+                        <select id="to" name="to" class="form-select" required>
+                            <option value="" disabled selected>Select Destination City</option>
+                            <option value="Manila">Manila</option>
+                            <option value="Cebu">Cebu</option>
+                            <option value="Davao">Davao</option>
+                            <option value="Clark">Clark</option>
+                            <option value="Iloilo">Iloilo</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="departure-date" class="form-label">Departure Date:</label>
+                        <input type="date" id="departure-date" name="departure-date" class="form-control" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="departure-time" class="form-label">Departure Time:</label>
+                        <input type="time" id="departure-time" name="departure-time" class="form-control" required>
+                    </div>
+
+                    <div id="return-date-container" class="mb-3" style="display: none;">
+                        <label for="return-date" class="form-label" style="display: block;">Return Date:</label>
+                        <input type="date" id="return-date" name="return-date" class="form-control mb-2" style="display: block;">
+                        
+                        <label for="return-time" class="form-label" style="display: block;">Return Time:</label>
+                        <input type="time" id="return-time" name="return-time" class="form-control" style="display: block;">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="price" class="form-label">Ticket Price:</label>
+                        <input type="number" id="price" name="price" class="form-control" placeholder="Add Ticket Price" required>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-100">Add Flights</button>
+                </form>
+            </article>
+        </fieldset>
+        </main>
+    </div>
+
+        <footer class="text-center mt-4">
+            <p>&copy; 2024 Mabuhay Airlines. All rights reserved.</p>
+        </footer>
+
+    <script src="{% static 'javascript/adminmod1.js' %}"></script>
+
+    {% endblock %}

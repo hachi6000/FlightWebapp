@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explore - Famous Places</title>
+</head>
+{% load static %}
+<body>
+    <header>
+        <!-- Using table to align the banner and the image button -->
+        <table width="100%">
+            <tr>
+                <td>
+                    <!-- Left side: Banner image -->
+                    <img src="#" alt="Banner">
+                </td>
+                <td align="right">
+                    <!-- your account -->
+                    <form action="http://127.0.0.1:8000/user_prof" method="GET">
+                        <input type="image" src="#" alt="Profile" style="border: none;">
+                    </form>
+                    <a href="http://127.0.0.1:8000/">Sign out</a>
+                </td>
+            </tr>
+        </table>
+        
+        <h1>Mabuhay Airlines</h1>
+        <nav>
+            <a href="http://127.0.0.1:8000/login">Log-in</a>
+            
+        </nav>
+    </header>
+
+ <h1>Explore Famous Places in the Philippines</h1>
+
+<h2>1. Banaue Rice Terraces</h2>
+<p>Carved into the mountains of Ifugao more than 2,000 years ago, the Banaue Rice Terraces are often called the "Eighth Wonder of the World" for their majestic landscape and historical significance.</p>
+<img src="{% static 'Media/banaue.jpeg' %}" width="600" height="400">
+
+<h2>2. Chocolate Hills, Bohol</h2>
+<p>A unique geological formation in Bohol, the Chocolate Hills consist of over 1,200 hills that turn brown during the dry season, resembling rows of chocolate mounds.</p>
+<img src="{% static 'Media/chocolate.jpg' %}" width="600" height="400">
+
+<h2>3. Mayon Volcano, Albay</h2>
+<p>Known for its near-perfect cone shape, Mayon Volcano is an active stratovolcano in the Bicol Region. It is a popular spot for hiking, sightseeing, and photography.</p>
+<img src="{% static 'Media/Mayon.jpg' %}" width="600" height="400">
+
+<h2>4. Tubbataha Reefs Natural Park</h2>
+<p>A UNESCO World Heritage site, Tubbataha Reefs Natural Park is a sanctuary for marine biodiversity, featuring stunning coral reefs, a variety of fish species, and clear blue waters perfect for diving.</p>
+<img src="{% static 'Media/Tubbataha.jpg' %}" width="600" height="400">
+
+<h2>5. Intramuros, Manila</h2>
+<p>Intramuros, or the "Walled City," is a historic district in Manila. It was the center of Spanish colonial power in the Philippines and offers visitors a glimpse into the country's rich history through its preserved walls, museums, and churches.</p>
+<img src="{% static 'Media/intramuros.jpg' %}" width="600" height="400">
+
+</body>
+</html>

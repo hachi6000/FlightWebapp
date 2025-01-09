@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Mabuhay Airlines</title>
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'CSS/FLIGHTFRONT.css' %}">
+    </head>
+    <header>
+        <div><img src="{% static 'Media/mabuhay_logo.png' %}" class="logo" ></div>
+        
+        <nav class="d-flex justify-content-center">
+            <button class="Hbtn" type="button" onclick="window.location.href='{% url 'front' %}'">Book</button>
+            <button class="Hbtn" type="button" onclick="window.location.href='{% url 'promos' %}'">Promos</button>
+        </nav>
+    
+        <div style="text-align: right; margin-top: 10px;">
+            <form action="{% url 'user_prof' %}" method="GET">
+                <input type="image" src="{{ profile_picture_url|default:'static/media/default_profile.png' }}" alt="Profile"  style='height:43px; border-radius:50px;'>
+                <br>
+                <a onclick="return confirmSignOut()" style="top:20%" href="{% url 'logout' %}" style=" color:#ffffff; margin-left: 255px; margin-right: 10px;">Sign out</a>
+            </form>
+        </div>
+    </header>
+   <br>
+    <span class='p2'>Hello, {{ user_name }}!</span>
+    <main class="container my-5">
+        <fieldset class="container">
+            <div class="row align-items-center">
+                <legend style="font-size: 40px;">Upcoming Scheduled Flight</legend>
+                
+                <!-- Check if there is a nearest flight -->
+                {% if nearest_flight %}
+                    <p>Reference Number: {{ nearest_flight.reference_num }}</p>
+                    <p>Flight Status: {{ nearest_flight.flight_status }}</p>
+                    <p>Where: {{ nearest_flight.origin }} to {{ nearest_flight.destination }}</p>
+                    <p>When: {{ nearest_flight.departure }} at {{ nearest_flight.departure_time }}</p>
+                    <p>Seat Number: {{ nearest_flight.seat_num }}</p>
+                {% else %}
+                    <p>You have no upcoming flights.</p>
+                {% endif %}
+            </div>
+        </fieldset>
+
+        <section class="my-5 text-center">
+            <h2 class="p2">Book Your Dream Flight</h2>
+            <p class="p">Experience comfort and convenience with us.</p>
+        </section>
+
+        <article class="my-5">
+            <fieldset>
+            <h2 class="text-center">Find Flights</h2>
+            <form id="flightSearchForm" action="{% url 'result' %}" method="GET" class="border p-4">
+                <fieldset class="mb-4">
+                    <legend>Flight Type</legend>
+                    <div class="form-check form-check-inline">
+                        <input type="radio" id="one-way" name="flight-type" value="one-way" class="form-check-input" checked>
+                        <label for="one-way" class="form-check-label">One Way</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input type="radio" id="return" name="flight-type" value="return" class="form-check-input">
+                        <label for="return" class="form-check-label">Return</label>
+                    </div>
+                </fieldset>
+
+                <div class="mb-3">
+                    <label for="from" class="form-label">From:</label>
+                    <select id="from" name="from" class="form-select" required>
+                        <option value="" disabled selected>Departure City</option>
+                        <option value="Manila">Manila</option>
+                        <option value="Cebu">Cebu</option>
+                        <option value="Davao">Davao</option>
+                        <option value="Clark">Clark</option>
+                        <option value="Iloilo">Iloilo</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label for="to" class="form-label">To:</label>
+                    <select id="to" name="to" class="form-select" required>
+                        <option value="" disabled selected>Destination City</option>
+                        <option value="Manila">Manila</option>
+                        <option value="Cebu">Cebu</option>
+                        <option value="Davao">Davao</option>
+                        <option value="Clark">Clark</option>
+                        <option value="Iloilo">Iloilo</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label for="departure-date" class="form-label">Departure Date:</label>
+                    <input type="date" id="departure-date" name="departure-date" class="form-control" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="return-date" class="form-label">Return Date (optional):</label>
+                    <input type="date" id="return-date" name="return-date" class="form-control">
+                </div>
+
+                <div class="mb-3">
+                    <label for="passengers" class="form-label">Passengers: 1</label>
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100">Search Flights</button>
+            </form>
+        </fieldset>
+        </article>
+    </main>
+
+    
+
+    <footer>
+        <table style="width: 100%; height: 80px; text-align: center; border-collapse: collapse; table-layout: fixed;" border="1">
+            <tr>
+                <td style="border: 1px solid black;">Contact us at</td>
+                <td style="border: 1px solid black;">Mabuhay@airlines.com</td>
+                <td style="border: 1px solid black;"></td>
+            </tr>
+            <tr>
+                <td style="border: 1px solid black;">Phone</td>
+                <td style="border: 1px solid black;">+63 95 4345 345</td>
+                <td style="border: 1px solid black;">&copy;2024 Airlines. All rights reserved.</td>
+            </tr>
+            <tr>
+                <td style="border: 1px solid black;">Address</td>
+                <td style="border: 1px solid black;">123 Airline Road, City, Country</td>
+                <td style="border: 1px solid black;"></td>
+            </tr>
+        </table>
+    </footer>
+
+    <script src="{% static 'javascript/flightsearch.js' %}"></script>
+    <script>
+        function confirmSignOut() {
+            return confirm("Are you sure you want to sign out?");
+        }
+    </script>
+</body>
+{{ redirect_to_login_immediately }}
+</html>

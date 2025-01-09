@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Booking Payment</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            fetch('/api/provinces-cities/')
+                .then(response => response.json())
+                .then(data => {
+                    const provinceSelect = document.getElementById('billing-province');
+                    const citySelect = document.getElementById('billing-city');
+
+                    // Populate provinces
+                    data.provinces.forEach(province => {
+                        let option = document.createElement('option');
+                        option.value = province;
+                        option.textContent = province;
+                        provinceSelect.appendChild(option);
+                    });
+
+                    // Populate cities based on province selection
+                    provinceSelect.addEventListener('change', function() {
+                        citySelect.innerHTML = ''; // Clear previous options
+                        if (this.value === "Cavite") { // Example for Cavite
+                            const cities = ["Dasmariñas", "Bacoor", "Cavite City", "General Trias"];
+                            cities.forEach(city => {
+                                let option = document.createElement('option');
+                                option.value = city;
+                                option.textContent = city;
+                                citySelect.appendChild(option);
+                            });
+                        }
+                    });
+                });
+        });
+
+        // Function to handle form submission
+        function handleFormSubmit(event) {
+            event.preventDefault(); // Prevent the default form submission
+            
+            // Show the success modal
+            const successModal = new bootstrap.Modal(document.getElementById('successModal'));
+            successModal.show();
+            
+            // Redirect to the front page after 10 seconds
+            setTimeout(function() {
+                window.location.href = "{% url 'front' %}"; // Change this to your front page URL
+            }, 10000);
+        }
+    </script>
+</head>
+<body class="bg-light">
+    <div class="container py-5">
+        <h1>Payment</h1>
+        <form action="http://127.0.0.1:8000/signout" method="POST" style="display:inline;">
+            <button type="submit" class="btn btn-link text-decoration-none">Sign Out</button>
+        </form>
+
+        <form id="payment-form" 
+              action="{% url 'submit_payment' flight.id %}" method="POST" 
+              onsubmit="handleFormSubmit(event);" 
+              class="p-4 bg-white rounded shadow-sm">
+            {% csrf_token %}
+            {% if flight.id %}
+                <input type="hidden" name="flight_id" value="{{ flight.id }}">
+            {% endif %}
+            <input type="hidden" name="ticket_no" value="{{ ticket_no }}">  <!-- Randomly generated ticket number -->
+            <input type="hidden" name="departure" value="{{ flight.departure|date:'Y-m-d H:i:s' }}">
+            <input type="hidden" name="arrival" value="{{ flight.arrival|date:'Y-m-d H:i:s' }}">
+            <input type="hidden" name="origin" value="{{ flight.origin }}">
+            <input type="hidden" name="destination" value="{{ flight.destination }}">
+            <input type="hidden" name="price" value="{{ flight.price }}">
+
+            <h2 class="h5 mb-3">Credit Card Details</h2>
+            <div class="mb-3">
+                <label for="card-name" class="form-label">Cardholder's Name</label>
+                <input type="text" id="card-name" name="card-name" class="form-control" placeholder="John Doe" required>
+            </div>
+            <div class="mb-3">
+                <label for="card-number" class="form-label">Credit Card Number</label>
+                <input type="text" id="card-number" name="card-number" class="form-control" placeholder="1234 5678 9101 1121" required>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="exp-date" class="form-label">Expiration Date</label>
+                    <input type="month" id="exp-date" name="exp-date" class="form-control" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="cvv" class="form-label">CVV</label>
+                    <input type="text" id="cvv" name="cvv" class="form-control" placeholder="123" required>
+                </div>
+            </div>
+
+            <h2 class="h5 mt-4">Billing Address</h2>
+            <div class="mb-3">
+                <label for="Street" class="form-label">Street</label>
+                <input type="text" id="Street" name="Street" class="form-control" placeholder="123 Main St" required>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="billing-province" class="form-label">Province</label>
+                    <select id="billing-province" name="billing-province" class="form-select" required>
+                        <option value="" disabled selected>Select Province</option>
+                    </select>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="billing-city" class="form-label">City</label>
+                    <select id="billing-city" name="billing-city" class="form-select" required>
+                        <option value="" disabled selected>Select City</option>
+                    </select>
+                </div>
+            </div>
+
+            <input type="submit" value="Submit Payment" class="btn btn-primary">
+        </form>
+    </div>
+
+    <!-- Success Modal -->
+    <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="successModalLabel">Payment Successful</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Payment successful! Please wait for the booking to be confirmed. An email will be sent to you.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS (optional, for dropdowns and other components) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

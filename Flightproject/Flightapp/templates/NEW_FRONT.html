@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Airlines</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/NEW_FRONT.css' %}">
+  </head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div><img src="{% static 'Media/mabuhay_logo.png' %}" class="logo" ></div>
+      <div>
+          <button class="btn" type="button" onclick="window.location.href='http://127.0.0.1:8000/register'">Sign Up</button>
+          <button class="btn" type="button" onclick="window.location.href='http://127.0.0.1:8000/login'">Sign In</button>
+      </div>
+
+  </header>
+  <iframe class="vudeo" src="https://www.youtube.com/embed/y5vX8ZqkHaY" 
+  title="Second video title" 
+  frameborder="0" 
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+  referrerpolicy="strict-origin-when-cross-origin" 
+  allowfullscreen>
+</iframe>
+
+<main style="flex: 1; display:flex; padding: 0px; justify-content: center; align-items: center;" >
+<div style="z-index: 50; position: relative;" class="carousel-container"></div>
+  <div id="carouselExampleIndicators" class="carousel slide my-0" data-bs-ride="carousel" data-bs-interval="3000">
+
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="{% static 'Media/banaue.jpeg' %}" class="d-block w-100" alt="First Slide" height="800" >
+        <img src="{% static 'Media/banaue2.jpg' %}" class="overlay-image" alt="Overlay Image">
+        <p class="overlay-image-text">The Banaue Rice Terraces (Filipino: Hagdan-hagdang Palayan ng Banawe) [bɐˈnawe] are terraces that were carved into the mountains of Banaue, Ifugao, in the Philippines, by the ancestors of the Igorot people. The terraces are occasionally called the "Eighth Wonder of the World". It is commonly thought that the terraces were built with minimal equipment, largely by hand. The terraces are located approximately 1,500 meters (4,900 feet) above sea level. These are fed by an ancient irrigation system from the rainforests above the terraces. </p> 
+        <p class="title_in_image">Banaue Rice Terraces </p> 
+        <p class="text_in_image"> Carved into the mountains of Ifugao more than 2,000 years ago, the Banaue Rice Terraces are often called the "Eighth Wonder of the World" for their majestic landscape and historical significance.</p>
+      </div>
+      <div class="carousel-item">
+        <img src="{% static 'Media/chocolate.jpg' %}" class="d-block w-100" alt="Second Slide" height="800" >
+        <img src="{% static 'Media/chocolate2.webp' %}" class="overlay-image" alt="Overlay Image" height="312">
+        <p class="overlay-image-text">The Chocolate Hills (Cebuano: Mga Bungtod sa Tsokolate, Filipino: Mga Tsokolateng Burol or Mga Burol na Tsokolate) are a geological formation in the Bohol province of the Philippines. There are at least 1,260 hills, but there may be as many as 1,776 hills spread over an area of more than 50 square kilometers (20 sq mi). They are covered in green grass that turns into a chocolate-like brown during the dry season, hence the name. </p> 
+        <p class="title_in_image">Chocolate Hills </p> 
+        <p class="text_in_image"> A unique geological formation in Bohol, the Chocolate Hills consist of over 1,200 hills that turn brown during the dry season, resembling rows of chocolate mounds.</p>
+      </div>
+      <div class="carousel-item">
+        <img src="{% static 'Media/intramuros.jpg' %}" class="d-block w-100" alt="Third Slide" height="800">
+        <img src="{% static 'Media/intramuros2.jpg' %}" class="overlay-image" alt="Overlay Image" height="312">
+        <p class="overlay-image-text">Old-world Intramuros is home to Spanish-era landmarks like Fort Santiago, with a large stone gate and a shrine to national hero José Rizal. The ornate Manila Cathedral houses bronze carvings and stained glass windows, while the San Agustin Church museum has religious artwork and statues. Spanish colonial furniture and art fill Casa Manila museum, and horse-drawn carriages (kalesa) ply the area’s cobblestone streets. </p> 
+        <p class="title_in_image">Intramuros, Manila</p> 
+        <p class="text_in_image">Intramuros, or the "Walled City," is a historic district in Manila. It was the center of Spanish colonial power in the Philippines and offers visitors a glimpse into the country's rich history through its preserved walls, museums, and churches.</p>
+      </div>
+    </div>
+    <!-- <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button> -->
+  </div>
+</div>
+</main>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2024 Mabuhay Airlines. All rights reserved.</p>
+    <table style="width: 100%; height: 80px; text-align: center; border-collapse: collapse; table-layout: fixed;" border="1">
+        <tr>
+            <td style="border: 1px solid black;">Contact us at</td>
+            <td style="border: 1px solid black;">Mabuhay@airlines.com</td>
+            <td style="border: 1px solid black;"></td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid black;">Phone</td>
+            <td style="border: 1px solid black;">+63 95 4345 345</td>
+            <td style="border: 1px solid black;">&copy;2024 Airlines. All rights reserved.</td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid black;">Address</td>
+            <td style="border: 1px solid black;">123 Airline Road, City, Country</td>
+            <td style="border: 1px solid black;"></td>
+        </tr>
+    </table>
+</footer>
+</body>
+</html>
+
+</body>
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mabuhay Airlines</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'CSS/FlightResult.css' %}">
+</head>
+<body>
+    <header>
+        <div><img src="{% static 'Media/mabuhay_logo.png' %}" class="logo" ></div>
+        
+        <nav class="d-flex justify-content-center">
+            <button class="Hbtn" type="button" onclick="window.location.href='{% url 'front' %}'">Book</button>
+            <button class="Hbtn" type="button" onclick="window.location.href='{% url 'promos' %}'">Promos</button>
+        </nav>
+    
+        <div style="text-align: right; margin-top: 10px;">
+            <form action="{% url 'user_prof' %}" method="GET">
+                <input type="image" src="{{ profile_picture_url|default:'static/media/default_profile.png' }}" alt="Profile"  style='height:43px; border-radius:50px;'>
+                <br>
+                <a onclick="return confirmSignOut()" style="top:20%" href="{% url 'logout' %}" style=" color:#ffffff; margin-left: 255px; margin-right: 10px;">Sign out</a>
+            </form>
+        </div>
+    </header>
+
+    <section class="container my-5" style="background-color: white; border-radius: 8px; ">
+        <br>
+        <h2 class="mb-4">Available Flights</h2>
+        <!-- Display the flights dynamically -->
+        {% if flights %}
+            {% for flight in flights %}
+            <fieldset class="border p-3 mb-4">
+                <legend class="w-auto">Flight {{ flight.flight_number }}</legend>
+                <div class="row">
+                    <!-- Departure Information -->
+                    <div class="col-md-3">
+                        <p><strong>Departure:</strong></p>
+                        <p>{{ flight.departure }} at {{ flight.departure_time|time:"h:i A" }}</p>
+                        <p>{{ flight.origin }} ({{ flight.origin_code }})</p>
+                    </div>
+                    <!-- Arrival Information -->
+                    <div class="col-md-3">
+                        <p><strong>Arrival:</strong></p>
+                        <p>{{ flight.arrival }} at {{ flight.arrival_time|time:"h:i A" }}</p>
+                        <p>{{ flight.destination }} ({{ flight.destination_code }})</p>
+                    </div>
+                    <!-- Return Information -->
+                    <div class="col-md-3">
+                        <p><strong>Return:</strong></p>
+                        <p>
+                            {% if flight.return_date %}
+                                {{ flight.return_date }} at {{ flight.return_time|time:"h:i A" }}
+                            {% else %}
+                                N/A
+                            {% endif %}
+                        </p>
+                    </div>
+                    <!-- Duration and Price Information -->
+                    <div class="col-md-3">
+                        <p><strong>Price:</strong></p>
+                        <p id="price{{ flight.id }}" data-base-price="{{ flight.discounted_price }}">{{ flight.discounted_price }} PHP</p>
+                    </div>
+                </div>
+                <!-- Booking Form -->
+                <div>
+                    <form action="{% url 'personalInfo' flight.id %}" method="GET">
+                        <label style="text-align: left;" for="seatClass{{ flight.id }}" class="form-label">Choose Seat Class:</label>
+                        <select name="seat_class" id="seatClass{{ flight.id }}" class="form-select mb-3" required onchange="updatePrice({{ flight.id }})">
+                            <option value="economy">Economy</option>
+                            <option value="premium economy">Premium Economy</option>
+                            <option value="business">Business Class</option>
+                        </select>
+                        <button type="submit" class="btn btn-primary">Book Now</button>
+                    </form>
+                </div>
+            </fieldset>
+            {% endfor %}
+        {% else %}
+            <p>No flights match your search criteria.</p>
+        {% endif %}
+
+        <div class="mt-4">
+            <button onclick="window.location.href='{% url 'front' %}'" class="btn btn-secondary">Return to Booking</button>
+        </div>
+    </section>
+
+    <footer>
+        <table style="width: 100%; height: 80px; text-align: center; border-collapse: collapse; table-layout: fixed;" border="1">
+            <tr>
+                <td style="border: 1px solid black;">Contact us at</td>
+                <td style="border: 1px solid black;">Mabuhay@airlines.com</td>
+                <td style="border: 1px solid black;"></td>
+            </tr>
+            <tr>
+                <td style="border: 1px solid black;">Phone</td>
+                <td style="border: 1px solid black;">+63 95 4345 345</td>
+                <td style="border: 1px solid black;">&copy;2024 Airlines. All rights reserved.</td>
+            </tr>
+            <tr>
+                <td style="border: 1px solid black;">Address</td>
+                <td style="border: 1px solid black;">123 Airline Road, City, Country</td>
+                <td style="border: 1px solid black;"></td>
+            </tr>
+        </table>
+    </footer>
+
+    <!-- Bootstrap 5 JavaScript Bundle with Popper -->
+   <script src="{% static 'Javascript/result1.js' %}"></script>
+</body>
+{{ redirect_to_login_immediately }}
+</html>
