@@ -1,0 +1,115 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    background-color: #2C3E50;
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.header h1 {
+    font-size: 24px;
+    margin: 0;
+}
+
+.content {
+    margin: 20px;
+    text-align: center;
+}
+
+.content h2 {
+    font-size: 32px;
+    color: #2C3E50;
+    margin-bottom: 10px;
+}
+
+.content p {
+    color: #555;
+    font-size: 16px;
+}
+
+.table-container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    margin: 30px auto;
+    max-width: 600px; /* Restrict the width */
+}
+
+.table {
+    margin: 0 auto; /* Center the table horizontally */
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.table th,
+.table td {
+    text-align: center;
+    padding: 12px;
+    border: 1px solid #ddd;
+    font-size: 14px;
+}
+
+.table th {
+    background-color: #2C3E50;
+    color: white;
+    font-weight: bold;
+}
+
+.table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.filter-options {
+    margin-bottom: 15px;
+}
+
+.filter-options select {
+    padding: 8px;
+    font-size: 14px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    margin-right: 10px;
+}
+
+.filter-options button {
+    padding: 8px 12px;
+    background-color: #2C3E50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.filter-options button:hover {
+    background-color: #1A252F;
+}
+
+.generate-report {
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+}
+
+.generate-report button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    background-color: #2C3E50;
+    color: white;
+    cursor: pointer;
+}
+
+.generate-report button:hover {
+    background-color: #1A252F;
+}

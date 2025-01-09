@@ -1,0 +1,145 @@
+body {
+    font-family: 'Roboto', sans-serif; /* Font Family */
+    display: flex;
+    color:#ecedec;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-image: url("/static/Media/PLANE4.jpg"); 
+    background-size: cover;
+    background-position: center;
+}
+
+.form {
+    font-family: 'Roboto', sans-serif; /* Font Family */
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background: linear-gradient(45deg, #1b1657, #1b1657);
+    padding: 30px;
+    width: 450px;
+    border-radius: 20px;
+    transition: background 0.3s ease;
+}
+
+.form:hover {
+    background: linear-gradient(45deg, #1b1657, #1b1657);
+}
+
+::placeholder {
+    font-family: inherit;
+}
+
+.inputForm {
+    border: 1.5px solid #ecedec;
+    border-radius: 10em;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    transition: 0.2s ease-in-out;
+    background-color: white;
+}
+
+.input {
+    margin-left: 10px;
+    border-radius: 10rem;
+    border: none;
+    width: 100%;
+    height: 100%;
+}
+
+.input:focus {
+    outline: none;
+}
+
+.inputForm:focus-within {
+    border: 1.5px solid orange;
+}
+
+.button {
+    position: relative;
+    display: inline-block;
+    margin: 15px;
+    padding: 7px 30px;
+    text-align: center;
+    font-size: 18px;
+    letter-spacing: 1px;
+    text-decoration: none;
+    color: #fffefe;
+    background: transparent;
+    cursor: pointer;
+    transition: ease-out 0.5s;
+    border: 2px solid #150c35;
+    border-radius: 10px;
+    box-shadow: inset 0 0 0 0 #2e1483;
+  }
+  
+  .button:hover {
+    color: rgb(22, 11, 51);
+    box-shadow: inset 0 -100px 0 0 #2d1a69;
+  }
+  
+  .button:active {
+    transform: scale(0.9);
+  }
+
+@keyframes sh02 {
+from {
+    opacity: 0;
+    left: 0%;
+}
+
+50% {
+    opacity: 1;
+}
+
+to {
+    opacity: 0;
+    left: 100%;
+}
+}
+
+.button:active {
+    box-shadow: 0 0 0 0 transparent;
+    -webkit-transition: box-shadow 0.2s ease-in;
+    -moz-transition: box-shadow 0.2s ease-in;
+    transition: box-shadow 0.2s ease-in;
+}
+
+a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.explore-anchor {
+    font-size: 24px;
+    font-weight: bold;
+    color: yellow;
+    text-align: center;
+    margin: 20px 0;
+    display: block;
+    transition: color 0.3s ease;
+}
+
+.explore-anchor:hover {
+    color: orange;
+}
+
+.p {
+    text-align: center;
+    color: rgb(255, 255, 255);
+    font-size: 14px;
+    margin: 5px 0;
+}
+
+.span {
+    font-size: 14px;
+    margin-left: 5px;
+    color: white;
+    font-weight: 500;
+    cursor: pointer;
+}

@@ -1,0 +1,9 @@
+{
+    "provinces": [
+        {"name": "Manila", "cities": ["Quezon City", "Makati", "Pasay"]},
+        {"name": "Cebu", "cities": ["Cebu City", "Mandaue", "Lapu-Lapu"]},
+        {"name": "Davao", "cities": ["Davao City", "Tagum", "Panabo"]},
+        {"name": "Clark", "cities": ["Angeles", "Mabalacat", "San Fernando"]},
+        {"name": "Iloilo", "cities": ["Iloilo City", "Passi", "Oton"]}
+    ]
+}

@@ -1,0 +1,193 @@
+body {
+    font-size: 16px;
+    color: #0d0653;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-image: url("/static/Media/front_bore.webp"); 
+    background-size: 100% 100%;
+    background-position: top;
+    background-repeat:no-repeat;
+    background-attachment: fixed;
+    background-color: rgb(255, 255, 255);
+    text-align: center;
+    margin: 0; 
+    padding: 0; 
+}
+#return-date {
+    display: none; 
+}
+
+.logo {
+    height: 200px;   /* Set logo height */
+    width: auto;    /* Automatically adjust width to maintain aspect ratio */
+    object-fit: contain;
+    position: relative;  /* Set positioning context */
+    left: -30%;             /* Move the logo 1% from the left side of the header */
+}
+
+header {
+    background-color: #16123f;
+    color: white;
+    padding: 5px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 120px;    /* Set a fixed header height */
+    border-bottom: 10px solid #ffffff;
+}
+
+.p{
+    color:#ffffff;
+    font-size: 24px;
+    text-shadow: 
+    -1px -1px 0 black, 
+     1px -1px 0 black,
+    -1px  1px 0 black,
+     1px  1px 0 black; 
+}
+
+.p2{
+    color:#ffffff;
+    font-size: 40px;
+    text-shadow: 
+    -1px -1px 0 black, /* Outline on top-left */
+     1px -1px 0 black, /* Outline on top-right */
+    -1px  1px 0 black, /* Outline on bottom-left */
+     1px  1px 0 black; /* Outline on bottom-right */
+}
+
+
+
+input[type="radio"][value="return"]:checked ~ #return-date {
+    display: inline; 
+}
+fieldset {
+    background-color: rgb(243, 243, 243); 
+    border: 2px solid #a5a5a5; 
+    padding: 55px; 
+    width: 70%;
+    margin: 40px auto;
+    border-radius: 8px; 
+
+}
+footer {
+    background-color: #000000;
+    color: #ffffff;
+    text-align: center;
+    padding: 30px;
+    margin-top: auto;
+    border-top: 2px solid rgb(255, 255, 255);
+}
+
+footer .contact-info {
+    margin-bottom: 10px;
+}
+
+.profile-picture {
+    border-radius: 50%;
+    object-fit: cover;
+    width: 50px; /* Match the height for a perfect circle */
+    height: 50px;
+    border: 2px solid #fff; /* Optional: Add a border for better visual appeal */
+}
+
+.btn {
+    position: relative;
+    display: inline-block;
+    margin: 15px;
+    padding: 7px 30px;
+    text-align: center;
+    font-size: 18px;
+    letter-spacing: 1px;
+    text-decoration: none;
+    color: #000000;
+    background: transparent;
+    cursor: pointer;
+    transition: ease-out 0.5s;
+    border: 2px solid #150c35;
+    border-radius: 10px;
+    box-shadow: inset 0 0 0 0 #2e1483;
+  }
+  
+  .btn:hover {
+    color: white;
+    box-shadow: inset 0 -100px 0 0 #2d1a69;
+  }
+  
+  .btn:active {
+    transform: scale(0.9);
+  }
+
+@keyframes sh02 {
+from {
+    opacity: 0;
+    left: 0%;
+}
+
+50% {
+    opacity: 1;
+}
+
+to {
+    opacity: 0;
+    left: 100%;
+}
+}
+
+.btn:active {
+    box-shadow: 0 0 0 0 transparent;
+    -webkit-transition: box-shadow 0.2s ease-in;
+    -moz-transition: box-shadow 0.2s ease-in;
+    transition: box-shadow 0.2s ease-in;
+}
+.Hbtn {
+    position: relative;
+    display: inline-block;
+    margin: 15px;
+    padding: 7px 30px;
+    text-align: center;
+    font-size: 18px;
+    letter-spacing: 1px;
+    text-decoration: none;
+    color: #fffefe;
+    background: transparent;
+    cursor: pointer;
+    transition: ease-out 0.5s;
+    border: 2px solid #150c35;
+    border-radius: 10px;
+    box-shadow: inset 0 0 0 0 #2e1483;
+  }
+  
+  .Hbtn:hover {
+    color: rgb(255, 255, 255);
+    box-shadow: inset 0 -100px 0 0 #2d1a69;
+  }
+  
+  .Hbtn:active {
+    transform: scale(0.9);
+  }
+
+@keyframes sh02 {
+from {
+    opacity: 0;
+    left: 0%;
+}
+
+50% {
+    opacity: 1;
+}
+
+to {
+    opacity: 0;
+    left: 100%;
+}
+}
+
+.Hbtn:active {
+    box-shadow: 0 0 0 0 transparent;
+    -webkit-transition: box-shadow 0.2s ease-in;
+    -moz-transition: box-shadow 0.2s ease-in;
+    transition: box-shadow 0.2s ease-in;
+}
